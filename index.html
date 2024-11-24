@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestão Médica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    #login-section, #main-section {
+      display: none;
+      padding: 20px;
+    }
+    #login-section.active, #main-section.active {
+      display: block;
+    }
+    #login-box {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    #login-box input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    #login-box button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #login-box button:hover {
+      background-color: #0056b3;
+    }
+    nav {
+      background-color: #f4f4f4;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      padding: 20px;
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    .highlight {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sistema de Gestão Médica</h1>
+  </header>
+
+  <!-- Tela de Login -->
+  <div id="login-section" class="active">
+    <div id="login-box">
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Usuário" required>
+      <input type="password" id="password" placeholder="Senha" required>
+      <button onclick="login()">Entrar</button>
+      <p id="error-msg" style="color: red; display: none;">Usuário ou senha incorretos!</p>
+    </div>
+  </div>
+
+  <!-- Painel Principal -->
+  <div id="main-section">
+    <nav>
+      <a href="#relatorios" onclick="showSection('relatorios')">Relatórios</a>
+      <a href="#estatisticas" onclick="showSection('estatisticas')">Estatísticas</a>
+      <a href="#agendamentos" onclick="showSection('agendamentos')">Agendamentos</a>
+      <a href="#consulta" onclick="showSection('consulta')">Consulta</a>
+    </nav>
+
+    <!-- Seção de Relatórios -->
+    <section id="relatorios" class="active">
+      <h2>Relatórios</h2>
+      <p><strong>Especialidades com mais de 10 médicos:</strong></p>
+      <table>
+        <tr>
+          <th>Especialidade</th>
+          <th>Número de Médicos</th>
+          <th>Total de Pacientes Atendidos</th>
+        </tr>
+        <tr>
+          <td>Cardiologia</td>
+          <td>15</td>
+          <td>120</td>
+        </tr>
+        <tr class="highlight">
+          <td>Ortopedia</td>
+          <td>12</td>
+          <td>80</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Seção de Estatísticas -->
+    <section id="estatisticas">
+      <h2>Estatísticas</h2>
+      <p><strong>Proporção de consultas:</strong></p>
+      <table>
+        <tr>
+          <th>Status</th>
+          <th>Número</th>
+          <th>Proporção</th>
+        </tr>
+        <tr>
+          <td>Agendadas</td>
+          <td>50</td>
+          <td>40%</td>
+        </tr>
+        <tr>
+          <td>Realizadas</td>
+          <td>60</td>
+          <td>48%</td>
+        </tr>
+        <tr class="highlight">
+          <td>Canceladas</td>
+          <td>10</td>
+          <td>12%</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Seção de Agendamentos -->
+    <section id="agendamentos">
+      <h2>Agendamentos</h2>
+      <p><strong>Consultas Agendadas para '2024-10-20':</strong></p>
+      <table>
+        <tr>
+          <th>Médico</th>
+          <th>Paciente</th>
+          <th>Horário</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td>Dr. João</td>
+          <td>Maria Silva</td>
+          <td>10:00</td>
+          <td>Confirmada</td>
+        </tr>
+        <tr class="highlight">
+          <td>Dra. Ana</td>
+          <td>Pedro Santos</td>
+          <td>11:30</td>
+          <td>Confirmada</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Seção de Consulta -->
+    <section id="consulta">
+      <h2>Consulta</h2>
+      <form>
+        <label for="medico">Médico:</label>
+        <select id="medico" name="medico">
+          <option value="joao">Dr. João</option>
+          <option value="ana">Dra. Ana</option>
+        </select>
+        <br><br>
+        <label for="paciente">Paciente:</label>
+        <input type="text" id="paciente" name="paciente">
+        <br><br>
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data">
+        <br><br>
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+          <option value="confirmada">Confirmada</option>
+          <option value="cancelada">Cancelada</option>
+        </select>
+        <br><br>
+        <button type="submit">Agendar Consulta</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === "admin" && password === "1234") {
+        document.getElementById('login-section').classList.remove('active');
+        document.getElementById('main-section').classList.add('active');
+      } else {
+        document.getElementById('error-msg').style.display = "block";
+      }
+    }
+
+    function showSection(id) {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>
